@@ -1,4 +1,4 @@
-from app import db
+from app import db, ma
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -22,13 +22,10 @@ class User(db.Model):
         return f"<User: {self.username}>"
 
 
-def list_all():
-    users = db.session.query(User).all()
-    return users
-
-def add_user(username, email, senha):
-    user_add = User(username, email, senha)
-    db.session.add(user_add)
-    db.session.commit()
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "username", "email")  # Password is not serialized, for security.
 
 
+user_share_schema = UserSchema()  # Retorna apenas um dado serializado json
+users_share_schema = UserSchema(many=True)  # Retorna varios dados serializados json
