@@ -10,6 +10,7 @@ class User(db.Model):
     password = db.Column(db.String(128), nullable=False)
 
     def __init__(self, username, email, password, id=None):
+        self.id = id
         self.username = username
         self.email = email
         self.password = generate_password_hash(password)
@@ -30,4 +31,4 @@ def add_user(username, email, senha):
     db.session.add(user_add)
     db.session.commit()
 
-print(list_all())
+

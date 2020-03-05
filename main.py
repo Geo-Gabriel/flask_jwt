@@ -14,3 +14,13 @@ def make_shell_context():
         db=db,
         User=User
     )
+
+
+@app.route('/auth/register', methods=['GET', 'POST'])
+def register():
+    return 'Hello'
+
+
+@app.route('/auth/login', methods=['GET', 'POST'])
+def login():
+    pass
